@@ -95,7 +95,7 @@ a {
     right: 15px;
     width: 25px;
     height: 25px;
-    background: url("../../../src/assets/img/search.svg") no-repeat;
+    /* background: url("../../../src/assets/img/search.svg") no-repeat; */
     background-size: cover;
 }
 .inp_search {

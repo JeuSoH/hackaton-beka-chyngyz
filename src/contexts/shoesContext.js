@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useReducer } from "react";
 import { countPrice, JSON_API } from "../helpers/Constants";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const shoesContext = React.createContext();
 
@@ -38,15 +38,15 @@ const reducer = (state = INIT_STATE, action) => {
 };
 
 const ShoesContextProvider = ({ children }) => {
-    let history = useHistory();
+    // let navigate = useNavigate();
     function postNewShoe(shoe) {
         axios.post(`${JSON_API}`, shoe);
     }
-    async function getShoes(history) {
-        console.log(history);
-        const search = new URLSearchParams(history.location.search);
+    async function getShoes() {
+        // console.log(window);
+        const search = new URLSearchParams(window.location.search);
         search.set("_limit", 6);
-        history.push(`${history.location.pathname}?${search.toString()}`);
+        // window.push(`${window.location.pathname}?${search.toString()}`);
 
         let res = await axios.get(`${JSON_API}${window.location.search}`);
         dispatch({
@@ -130,7 +130,7 @@ const ShoesContextProvider = ({ children }) => {
         if (count < 1) return;
         let cart = JSON.parse(localStorage.getItem("streetHeadShoes"));
         cart.shoes = cart.shoes.map((elem) => {
-            if (elem.id == id) {
+            if (elem.id === id) {
                 elem.count = count;
                 elem.subPrice = elem.price * count;
             }
@@ -143,7 +143,7 @@ const ShoesContextProvider = ({ children }) => {
 
     function deleteFromCart(id) {
         let cart = JSON.parse(localStorage.getItem("streetHeadShoes"));
-        cart.shoes = cart.shoes.filter((elem) => elem.id != id);
+        cart.shoes = cart.shoes.filter((elem) => elem.id !== id);
         cart.totalPrice = countPrice(cart.shoes);
         localStorage.setItem("streetHeadShoes", JSON.stringify(cart));
         getCart();

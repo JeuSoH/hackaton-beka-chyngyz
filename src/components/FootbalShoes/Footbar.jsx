@@ -4,6 +4,7 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { shoesContext } from "../../contexts/shoesContext";
+import { useNavigate } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -15,27 +16,28 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Sidebar = ({ history }) => {
+const Sidebar = ({ }) => {
     const classes = useStyles();
     const { getShoes } = useContext(shoesContext);
     const [memory, setMemory] = useState(getMemory());
+    const navigate = useNavigate
 
     function getMemory() {
-        const search = new URLSearchParams(history.location.search);
+        const search = new URLSearchParams(window.location.search);
         return search.get("category");
     }
 
     const handleChangeMemory = (e) => {
         if (e.target.value === "all") {
-            history.push(`${history.location.pathname.replace("category")}`);
-            getShoes(history);
+            navigate(`${window.location.pathname.replace("category")}`);
+            getShoes(navigate);
             return;
         }
 
-        const search = new URLSearchParams(history.location.search);
+        const search = new URLSearchParams(window.location.search);
         search.set("category", e.target.value);
-        history.push(`${history.location.pathname}?${search.toString()}`);
-        getShoes(history);
+        navigate(`${window.location.pathname}?${search.toString()}`);
+        getShoes(navigate);
         setMemory(e.target.value);
     };
 

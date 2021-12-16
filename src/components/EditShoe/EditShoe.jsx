@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './EditShoe.css';
 import { CircularProgress } from '@material-ui/core';
-import { useHistory, useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { shoesContext } from '../../contexts/shoesContext';
 import ShoeDetails from '../ShoeDetails/ShoeDetails';
 import app from '../../base';
@@ -11,7 +11,7 @@ const EditShoe = () => {
     const { getShoeDetails, saveShoe, shoeDetails } = useContext(shoesContext);
     const [editedShoe, setEditedShoe] = useState({});
     const [pending, setPending] = useState(true);
-    const history = useHistory();
+    const navigate = useNavigate();
     const { id } = useParams();
 
     const [test, setTest] = useState(shoeDetails)
@@ -22,7 +22,7 @@ const EditShoe = () => {
         app.auth().onAuthStateChanged((user) => {
             console.log('authstatechanged')
             if (!user) {
-                history.push("/login");
+                navigate("/login");
             } else if (shoeDetails) {
 
                 setPending(false);
@@ -42,7 +42,7 @@ const EditShoe = () => {
     const handleSave = () => {
         saveShoe(id, editedShoe);
         setEditedShoe(false);
-        history.push("/admin");
+        navigate("/admin");
     };
 
 

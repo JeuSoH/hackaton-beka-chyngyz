@@ -98,7 +98,7 @@ const AddShoes = () => {
                     />
                 </div>
                 <div className="add_block">
-                    <label>3)Category:</label>
+                    <label>3:Category:</label>
                     <label className="label_first">Running</label>
                     <input
                         type="radio"
@@ -136,7 +136,7 @@ const AddShoes = () => {
                     />
                 </div>
                 <div className="add_block">
-                    <label>4)Sex:</label>
+                    <label>4:Sex:</label>
                     <label className="label_first">Men</label>
                     <input
                         type="radio"
@@ -153,7 +153,7 @@ const AddShoes = () => {
                     />
                 </div>
                 <div className="add_block">
-                    <label>5)Description:</label>
+                    <label>5:Description:</label>
                     <input
                         className="inp-add"
                         value={shoe.description}
@@ -164,7 +164,7 @@ const AddShoes = () => {
                     />
                 </div>
                 <div className="add_block">
-                    <label>6)Size:</label>
+                    <label>6:Size:</label>
                     <label className="label_first">38</label>
                     <input
                         type="checkbox"
@@ -202,7 +202,7 @@ const AddShoes = () => {
                     />
                 </div>
                 <div className="add_block">
-                    <label>6)Color:</label>
+                    <label>6:Color:</label>
                     <input
                         className="inp-add"
                         value={shoe.color}
@@ -213,7 +213,7 @@ const AddShoes = () => {
                     />
                 </div>
                 <div className="add_block">
-                    <label>6)Price: $</label>
+                    <label>6:Price: $</label>
                     <input
                         className="inp-add"
                         value={shoe.price}
@@ -224,7 +224,7 @@ const AddShoes = () => {
                     />
                 </div>
                 <div className="add_block">
-                    <label>7)Главное изображение:</label>
+                    <label>7:Главное изображение:</label>
                     <input
                         className="inp-add"
                         value={shoe.images[0]}

@@ -5,6 +5,7 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { shoesContext } from "../../contexts/shoesContext";
 import "./Sidebar.css";
+import { useNavigate} from 'react-router'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -16,41 +17,41 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Sidebar = ({ history }) => {
+const Sidebar = () => {
     const classes = useStyles();
     const { getShoes } = useContext(shoesContext);
     const [sliderValue, setSliderValue] = useState(getSliderMemory());
     const [memory, setMemory] = useState(getMemory());
-
+    const navigate = useNavigate()
     function getMemory() {
-        const search = new URLSearchParams(history.location.search);
+        const search = new URLSearchParams(window.location.search);
         return search.get("sex");
     }
 
     function getSliderMemory() {
-        const search = new URLSearchParams(history.location.search);
+        const search = new URLSearchParams(window.location.search);
         return search.get("price_lte");
     }
 
     function handleSliderValue(e, value) {
-        const search = new URLSearchParams(history.location.search);
+        const search = new URLSearchParams(window.location.search);
         search.set("price_lte", value);
-        history.push(`${history.location.pathname}?${search.toString()}`);
-        getShoes(history);
+        navigate(`${window.location.pathname}?${search.toString()}`);
+        getShoes(navigate);
         setSliderValue(value);
     }
 
     const handleChangeMemory = (e) => {
         if (e.target.value === "all") {
-            history.push(`${history.location.pathname.replace("sex")}`);
-            getShoes(history);
+            navigate(`${window.location.pathname.replace("sex")}`);
+            getShoes(navigate);
             return;
         }
 
-        const search = new URLSearchParams(history.location.search);
+        const search = new URLSearchParams(window.location.search);
         search.set("sex", e.target.value);
-        history.push(`${history.location.pathname}?${search.toString()}`);
-        getShoes(history);
+        navigate(`${window.location.pathname}?${search.toString()}`);
+        getShoes(navigate);
         setMemory(e.target.value);
     };
 

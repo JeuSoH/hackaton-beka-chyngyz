@@ -2,13 +2,13 @@ import React, { useContext, useState } from "react";
 import "./Header.css";
 import { authContext } from "../../contexts/AuthContext";
 import Cart from "../../assets/img/cart.svg";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { shoesContext } from "../../contexts/shoesContext";
 import User from "../../assets/img/user.png";
 
 const Header = () => {
     const { currentUser, logoutUser } = useContext(authContext);
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const { search, searchData } = useContext(shoesContext);
     const { searchValue, setSearchValue } = useState("");
@@ -70,12 +70,14 @@ const Header = () => {
                             </div>
                         </div>
                         <div className="navbar_right">
+                            <Link to='/cart'>
                             <div
-                                onClick={() => history.push("/cart")}
+                                onClick={() => navigate("/cart")}
                                 className="cart"
                             >
                                 <img src={Cart} alt="" />
                             </div>
+                            </Link>
                             <Link to="/profile" className="settings-btn">
                                 <img src={User} className="user_icon" />
                             </Link>
@@ -89,12 +91,14 @@ const Header = () => {
                                     </p>
                                 </div>
                             ) : (
+                                <Link to='/login'>
                                 <div
                                     className="log-in-out-container"
-                                    onClick={() => history.push("/login")}
+                                    onClick={() => navigate("/login")}
                                 >
                                     <p className="log-in-out">ВОЙТИ</p>
                                 </div>
+                                </Link>
                             )}
                         </div>
                     </div>
